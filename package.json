@@ -1,0 +1,28 @@
+{
+  "name": "node-serialosc",
+  "description": "serialosc module for easy monome interaction",
+  "version": "0.0.1",
+  "main": "index",
+  "author": {
+    "name": "Tom Dinchak",
+    "email": "dinchak@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Myles Borins",
+      "email": "myles.borins@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "mdns": "0.0.7",
+    "osc-min": "0.0.5"
+  },
+  "keywords": [
+    "monome",
+    "serialosc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dinchak/node-serialosc.git"
+  }
+}
