@@ -8,8 +8,8 @@ var virtualDevice = serialosc.createVirtualDevice({
   serialoscPort: 12345
 });
 
-serialosc.on('discover', function(device) {
-  console.log("discovered " + device.service.name);
+serialosc.on('deviceFound', function(device) {
+  console.log("found device " + device.service.name);
   device.focus();
   device.on('press', function(x, y, s) {
     console.log('press from ' + device.service.name + ': ' + x + ", " + y + ", " + s);
@@ -24,6 +24,9 @@ serialosc.on('discover', function(device) {
       console.log(row);
     }
   });
+});
+serialosc.on('deviceLost', function(device) {
+  console.log("lost device " + device.service.name);
 });
 
 serialosc.discover();
