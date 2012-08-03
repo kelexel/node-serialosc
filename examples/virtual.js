@@ -30,8 +30,8 @@ serialosc.on('discover', function(device) {
   device.focus();
   device.on('msg', function(addr, args) {
     console.log(device.service.name + ": " + addr + " " + args);
-    if (addr == "/monome/grid/key/press") {
-      device.msg("/monome/grid/led", [args[0], args[1], args[2]]);
+    if (addr == "/monome/grid/key") {
+      device.msg("/monome/grid/led/set", [args[0], args[1], args[2]]);
     }
   });
 });
