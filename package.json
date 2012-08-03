@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "mdns": "0.0.7",
-    "osc-min": "0.0.5"
+    "osc-min": "0.0.5",
+    "infusion": "git://github.com/fluid-project/infusion.git#master"
   },
   "keywords": [
     "monome",
