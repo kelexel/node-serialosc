@@ -8,25 +8,23 @@ var virtualDevice = serialosc.createVirtualDevice({
   prefix: '/monome',
   sizeX: 16,
   sizeY: 8,
-  serialoscPort: 12345,
-});
-virtualDevice.on('stateChange', function() {
-  for (var y = 0; y < virtualDevice.sizeY; y++) {
-    var row = '';
-    for (var x = 0; x < virtualDevice.sizeX; x++) {
-      row += virtualDevice.ledState[x][y];
-    }
-    console.log(row);
-  }
+  serialoscPort: 12345
 });
 
 serialosc.on('discover', function(device) {
   console.log("discovered " + device.service.name);
   device.focus();
-  device.on('msg', function(addr, args) {
-    console.log(device.service.name + ": " + addr + " " + args);
-    if (addr == "/monome/grid/key") {
-      device.msg("/monome/grid/led/set", [args[0], args[1], args[2]]);
+  device.on('press', function(x, y, s) {
+    console.log("press from " + device.service.name);
+    device.msg("/monome/grid/led/set", [x, y, s]);
+  });
+  device.on('stateChange', function() {
+    for (var y = 0; y < device.sizeY; y++) {
+      var row = '';
+      for (var x = 0; x < device.sizeX; x++) {
+        row += device.ledState[x][y];
+      }
+      console.log(row);
     }
   });
 });
