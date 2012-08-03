@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "mdns": "0.0.7",
-    "osc-min": "0.0.5",
+    "node-osc": "git://github.com/TheAlphaNerd/node-osc.git#master",
     "infusion": "git://github.com/fluid-project/infusion.git#master",
     "node-jqUnit": "git://github.com/dinchak/node-jqUnit.git#master"
   },

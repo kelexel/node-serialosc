@@ -1,7 +1,4 @@
-var osc = require('osc-min');
-var udp = require('dgram');
 var serialosc = require('./../lib/serialosc.js');
-var stdin = process.openStdin();
 
 var virtualDevice = serialosc.createVirtualDevice({
   name: 'test virtual grid',
@@ -15,8 +12,8 @@ serialosc.on('discover', function(device) {
   console.log("discovered " + device.service.name);
   device.focus();
   device.on('press', function(x, y, s) {
-    console.log("press from " + device.service.name);
-    device.msg("/monome/grid/led/set", [x, y, s]);
+    console.log('press from ' + device.service.name + ': ' + x + ", " + y + ", " + s);
+    device.msg("/monome/grid/led/set", x, y, s);
   });
   device.on('stateChange', function() {
     for (var y = 0; y < device.sizeY; y++) {
@@ -31,6 +28,7 @@ serialosc.on('discover', function(device) {
 
 serialosc.discover();
 
+var stdin = process.openStdin();
 stdin.on('data', function(chunk) { 
   var cmd = chunk.toString();
   var matches = cmd.match(/(\d+),(\d+),(\d+)/);

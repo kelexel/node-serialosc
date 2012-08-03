@@ -10,24 +10,9 @@ jqUnit.test("Detect Devices", function() {
   service.name = "test monome";
   service.port = "1234";
   service.addresses = ['127.0.0.1'];
-  serialosc.discoverDevice(service);
+  var device = serialosc.createDevice(service);
 
-  var sizeMsg = { 
-    address: '/sys/size', 
-    arguments: [
-      { 
-        type: 'integer',
-        value: 8
-      },
-      { 
-        type: 'integer',
-        value: 8
-      }
-    ]
-  };
-
-  serialosc.devices[service.name].recvMsg(sizeMsg);
-  var device = serialosc.devices[service.name];
+  device.recvMsg(['/sys/size', 8, 8]);
   jqUnit.assert(device);
   jqUnit.assertValue(device.type, 'grid');
   jqUnit.assertValue(device.encoders, 0);
@@ -39,8 +24,7 @@ jqUnit.test("Detect Devices", function() {
   service.name = "test arc 2";
   service.port = "1234";
   service.addresses = ['127.0.0.1'];
-  serialosc.discoverDevice(service);
-  var device = serialosc.devices[service.name];
+  var device = serialosc.createDevice(service);
   jqUnit.assert(device);
   jqUnit.assertValue(device.type, 'arc');
   jqUnit.assertValue(device.encoders, 2);
