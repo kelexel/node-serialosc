@@ -3,11 +3,6 @@ var udp = require('dgram');
 var serialosc = require('./../lib/serialosc.js');
 var stdin = process.openStdin();
 
-var sendMsg = function(addr, args) {
-  var msg = osc.toBuffer({ address: addr, args: args });
-  udp.send(msg, 0, msg.length, device.serialoscPort, '127.0.0.1');
-}
-
 var virtualDevice = serialosc.createVirtualDevice({
   name: 'test virtual grid',
   prefix: '/monome',
