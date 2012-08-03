@@ -1,8 +1,8 @@
 {
-  "name": "node-serialosc",
+  "name": "serialosc",
   "description": "serialosc module for easy monome interaction",
   "version": "0.0.1",
-  "main": "index",
+  "main": "./lib/serialosc.js",
   "author": {
     "name": "Tom Dinchak",
     "email": "dinchak@gmail.com"
