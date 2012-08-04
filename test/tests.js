@@ -10,9 +10,9 @@ jqUnit.test("Detect Devices", function() {
   service.name = "test monome";
   service.port = "1234";
   service.addresses = ['127.0.0.1'];
-  var device = serialosc.createDevice(service);
+  var device = serialosc.discoverDevice(service);
 
-  device.recvSerialoscMsg(['/sys/size', 8, 8]);
+  device.oscIn(['/sys/size', 8, 8]);
   jqUnit.assert(device);
   jqUnit.assertValue(device.type, 'grid');
   jqUnit.assertValue(device.encoders, 0);

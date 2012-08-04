@@ -13,13 +13,13 @@ serialosc.on('deviceFound', function(device) {
   device.focus();
   device.on('press', function(x, y, s) {
     console.log('press from ' + device.service.name + ': ' + x + ", " + y + ", " + s);
-    device.msg("/monome/grid/led/set", x, y, s);
+    device.oscOut("/monome/grid/led/set", x, y, s);
   });
   device.on('stateChange', function() {
     for (var y = 0; y < device.sizeY; y++) {
       var row = '';
       for (var x = 0; x < device.sizeX; x++) {
-        row += device.ledState[x][y];
+        row += device.gridState[x][y];
       }
       console.log(row);
     }
@@ -36,7 +36,8 @@ stdin.on('data', function(chunk) {
   var cmd = chunk.toString();
   var matches = cmd.match(/(\d+),(\d+),(\d+)/);
   if (matches) {
-    virtualDevice.press(parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
+    var device = serialosc.devices['test virtual grid'];
+    device.press(parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]));
   }
   console.log("enter press data (ie. 3,5,1): "); 
 });
