@@ -10,11 +10,6 @@ var virtualDevice = serialosc.createVirtualDevice({
 
 serialosc.on('deviceFound', function(device) {
   console.log("found device " + device.service.name);
-  device.focus();
-  device.on('press', function(x, y, s) {
-    console.log('press from ' + device.service.name + ': ' + x + ", " + y + ", " + s);
-    device.oscOut("/monome/grid/led/set", x, y, s);
-  });
   device.on('stateChange', function() {
     console.log('---');
     for (var y = 0; y < device.sizeY; y++) {
