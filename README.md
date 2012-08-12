@@ -1,4 +1,4 @@
 node-serialosc
 ==============
 
-serialosc module for easy monome interaction
+serialosc module for monome device emulation
