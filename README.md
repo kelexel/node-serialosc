@@ -28,4 +28,4 @@ usage
     // emulate a press
     device.oscOut('/grid/key', x, y, s);
 
-see [https://github.com/dinchak/node-asciimonome] for a more complete example
+see https://github.com/dinchak/node-asciimonome for a more complete example
