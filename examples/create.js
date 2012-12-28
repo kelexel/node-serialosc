@@ -4,7 +4,7 @@ var serialosc = require('./../lib/serialosc.js');
 // example is show with all options and their defaults
 var device = serialosc.createDevice({
   type: 'grid',
-  id: 'virtual',
+  serialoscId: 'virtual',
   name: 'monome 64 (v0000001)',
   prefix: '/monome',
   sizeX: 8,
