@@ -7,8 +7,12 @@
     "name": "Tom Dinchak",
     "email": "dinchak@gmail.com"
   },
+  "scripts": {"test": "./node_modules/mocha/bin/mocha"},
   "dependencies": {
-    "mdns": "*",
+    "mdns": "latest",
+    "mocha": "latest",
+    "should": "latest",
+    "underscore": "latest",
     "node-osc": "git://github.com/TheAlphaNerd/node-osc.git#master"
   },
   "keywords": [
