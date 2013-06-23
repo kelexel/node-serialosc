@@ -16,12 +16,12 @@ describe('default device', function() {
   });
 
   it('responds to /sys/port', function(done) {
-    device._oscOut = function(msg, port) {
+    device.oscOut = function(msg, port) {
       msg.should.equal('/sys/port');
       port.should.equal(1337);
       done();
     };
-    device._oscIn(['/sys/port', 1337]);
+    device.oscIn(['/sys/port', 1337]);
     device._attributes.listenPort.should.equal(1337);
   });
 
@@ -34,7 +34,7 @@ describe('default device', function() {
       '/sys/prefix': false,
       '/sys/rotation': false
     };
-    device._oscOut = function(msg, arg1, arg2) {
+    device.oscOut = function(msg, arg1, arg2) {
       msgs[msg] = true;
       if (msg === '/sys/id') {
         arg1.should.equal(device._attributes.serialoscId);
@@ -64,16 +64,16 @@ describe('default device', function() {
       // if so mark test as done
       done();
     };
-    device._oscIn(['/sys/info']);
+    device.oscIn(['/sys/info']);
   });
 
   it('responds to /sys/prefix', function(done) {
-    device._oscOut = function(msg, prefix) {
+    device.oscOut = function(msg, prefix) {
       msg.should.equal('/sys/prefix');
       prefix.should.equal('/test');
       done();
     };
-    device._oscIn(['/sys/prefix', '/test']);
+    device.oscIn(['/sys/prefix', '/test']);
     device._attributes.prefix.should.equal('/test');
   });
 
@@ -94,7 +94,7 @@ describe('default device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/set', 3, 2, 1]);
+    device.oscIn([device._attributes.prefix + '/grid/led/set', 3, 2, 1]);
   });
 
   it('responds to /grid/led/set with state = 0', function(done) {
@@ -114,7 +114,7 @@ describe('default device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/set', 3, 2, 0]);
+    device.oscIn([device._attributes.prefix + '/grid/led/set', 3, 2, 0]);
   });
 
   it('responds to /grid/led/row', function(done) {
@@ -134,7 +134,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/row', 0, 0, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/row', 0, 0, 255]);
   });
 
   it('responds to /grid/led/col', function(done) {
@@ -154,7 +154,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/col', 0, 0, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/col', 0, 0, 255]);
   });
 
   it('responds to /grid/led/map', function(done) {
@@ -174,7 +174,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/map', 0, 0, 255, 255, 255, 255, 255, 255, 255, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/map', 0, 0, 255, 255, 255, 255, 255, 255, 255, 255]);
   });
 
   it('responds to /grid/led/all', function(done) {
@@ -194,7 +194,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/all', 0]);
+    device.oscIn([device._attributes.prefix + '/grid/led/all', 0]);
   });
 
   it('responds to /grid/led/level/set with state = 7', function(done) {
@@ -214,7 +214,7 @@ describe('default device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/set', 3, 2, 7]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/set', 3, 2, 7]);
   });
 
   it('responds to /grid/led/level/set with state = 15', function(done) {
@@ -234,7 +234,7 @@ describe('default device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/set', 3, 2, 15]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/set', 3, 2, 15]);
   });
 
   it('responds to /grid/led/level/row', function(done) {
@@ -254,7 +254,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/row', 0, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/row', 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -275,7 +275,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/col', 0, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/col', 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -296,7 +296,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/map', 0, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/map', 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -325,7 +325,7 @@ describe('default device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/all', 15]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/all', 15]);
   });
 });
 
@@ -352,12 +352,12 @@ describe('256 device', function() {
   });
 
   it('responds to /sys/port', function(done) {
-    device._oscOut = function(msg, port) {
+    device.oscOut = function(msg, port) {
       msg.should.equal('/sys/port');
       port.should.equal(1337);
       done();
     };
-    device._oscIn(['/sys/port', 1337]);
+    device.oscIn(['/sys/port', 1337]);
     device._attributes.listenPort.should.equal(1337);
   });
 
@@ -370,7 +370,7 @@ describe('256 device', function() {
       '/sys/prefix': false,
       '/sys/rotation': false
     };
-    device._oscOut = function(msg, arg1, arg2) {
+    device.oscOut = function(msg, arg1, arg2) {
       msgs[msg] = true;
       if (msg === '/sys/id') {
         arg1.should.equal(device._attributes.serialoscId);
@@ -400,16 +400,16 @@ describe('256 device', function() {
       // if so mark test as done
       done();
     };
-    device._oscIn(['/sys/info']);
+    device.oscIn(['/sys/info']);
   });
 
   it('responds to /sys/prefix', function(done) {
-    device._oscOut = function(msg, port) {
+    device.oscOut = function(msg, port) {
       msg.should.equal('/sys/prefix');
       port.should.equal('/test');
       done();
     };
-    device._oscIn(['/sys/prefix', '/test']);
+    device.oscIn(['/sys/prefix', '/test']);
     device._attributes.prefix.should.equal('/test');
   });
 
@@ -438,7 +438,7 @@ describe('256 device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/set', 14, 14, 1]);
+    device.oscIn([device._attributes.prefix + '/grid/led/set', 14, 14, 1]);
   });
 
   it('responds to /grid/led/set with state = 0', function(done) {
@@ -466,7 +466,7 @@ describe('256 device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/set', 14, 14, 0]);
+    device.oscIn([device._attributes.prefix + '/grid/led/set', 14, 14, 0]);
   });
 
   it('responds to /grid/led/row with x offset', function(done) {
@@ -494,7 +494,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/row', 8, 3, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/row', 8, 3, 255]);
   });
 
   it('responds to /grid/led/row with 2 byte row', function(done) {
@@ -522,7 +522,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/row', 0, 2, 255, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/row', 0, 2, 255, 255]);
   });
 
   it('responds to /grid/led/col with y offset', function(done) {
@@ -550,7 +550,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/col', 3, 8, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/col', 3, 8, 255]);
   });
 
   it('responds to /grid/led/col with 2 byte col', function(done) {
@@ -578,7 +578,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/col', 2, 0, 255, 255]);
+    device.oscIn([device._attributes.prefix + '/grid/led/col', 2, 0, 255, 255]);
   });
 
   it('responds to /grid/led/map with x and y offsets', function(done) {
@@ -606,7 +606,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/map', 8, 8,
+    device.oscIn([device._attributes.prefix + '/grid/led/map', 8, 8,
       255, 255, 255, 255, 255, 255, 255, 255]);
   });
 
@@ -635,7 +635,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/map', 8, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/map', 8, 0,
       255, 255, 255, 255, 255, 255, 255, 255]);
   });
 
@@ -664,7 +664,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/map', 0, 8,
+    device.oscIn([device._attributes.prefix + '/grid/led/map', 0, 8,
       255, 255, 255, 255, 255, 255, 255, 255]);
   });
 
@@ -693,7 +693,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/all', 0]);
+    device.oscIn([device._attributes.prefix + '/grid/led/all', 0]);
   });
 
   it('responds to /grid/led/level/set with state = 7', function(done) {
@@ -721,7 +721,7 @@ describe('256 device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/set', 14, 14, 7]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/set', 14, 14, 7]);
   });
 
   it('responds to /grid/led/level/set with state = 15', function(done) {
@@ -749,7 +749,7 @@ describe('256 device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/set', 14, 14, 15]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/set', 14, 14, 15]);
   });
 
   it('responds to /grid/led/level/row with x offset', function(done) {
@@ -777,7 +777,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/row', 8, 3,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/row', 8, 3,
       0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -806,7 +806,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/row', 0, 2,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/row', 0, 2,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -835,7 +835,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/col', 3, 8,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/col', 3, 8,
       0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -864,7 +864,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/col', 2, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/col', 2, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
@@ -893,7 +893,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/map', 8, 8,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/map', 8, 8,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -930,7 +930,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/map', 8, 0,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/map', 8, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -967,7 +967,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/map', 0, 8,
+    device.oscIn([device._attributes.prefix + '/grid/led/level/map', 0, 8,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -1004,7 +1004,7 @@ describe('256 device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/grid/led/level/all', 15]);
+    device.oscIn([device._attributes.prefix + '/grid/led/level/all', 15]);
   });
 });
 
@@ -1071,7 +1071,7 @@ describe('arc device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/ring/set', 1, 14, 5]);
+    device.oscIn([device._attributes.prefix + '/ring/set', 1, 14, 5]);
   });
 
   it('responds to /ring/set n = 1, x = 14, l = 0', function(done) {
@@ -1115,7 +1115,7 @@ describe('arc device', function() {
       ]);
       done();
     };
-    device._oscIn([device._attributes.prefix + '/ring/set', 1, 14, 0]);
+    device.oscIn([device._attributes.prefix + '/ring/set', 1, 14, 0]);
   });
 
   it('responds to /ring/all n = 2, l = 15', function(done) {
@@ -1161,7 +1161,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/all', 2, 15]);
+    device.oscIn([device._attributes.prefix + '/ring/all', 2, 15]);
   });
 
   it('responds to /ring/all n = 2, l = 0', function(done) {
@@ -1207,7 +1207,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/all', 2, 0]);
+    device.oscIn([device._attributes.prefix + '/ring/all', 2, 0]);
   });
 
   it('responds to /ring/map -- set encoder 0', function(done) {
@@ -1251,7 +1251,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/map', 0,
+    device.oscIn([device._attributes.prefix + '/ring/map', 0,
       15,15,15,15,15,15,15,15,
       15,15,15,15,15,15,15,15,
       10,10,10,10,10,10,10,10,
@@ -1304,7 +1304,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/map', 0,
+    device.oscIn([device._attributes.prefix + '/ring/map', 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0,
@@ -1357,7 +1357,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/range', 0, 0, 8, 1]);
+    device.oscIn([device._attributes.prefix + '/ring/range', 0, 0, 8, 1]);
   });
 
   it('responds to /ring/range -- negative x1', function(done) {
@@ -1401,7 +1401,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/range', 1, -8, 8, 1]);
+    device.oscIn([device._attributes.prefix + '/ring/range', 1, -8, 8, 1]);
   });
 
   it('responds to /ring/range -- negative x1 and x2', function(done) {
@@ -1445,7 +1445,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/range', 2, -8, -4, 1]);
+    device.oscIn([device._attributes.prefix + '/ring/range', 2, -8, -4, 1]);
   });
 
   it('responds to /ring/range -- really big x2', function(done) {
@@ -1489,7 +1489,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/range', 3, 56, 72, 1]);
+    device.oscIn([device._attributes.prefix + '/ring/range', 3, 56, 72, 1]);
   });
 
   it('responds to /ring/range -- really big x1 and x2', function(done) {
@@ -1533,7 +1533,7 @@ describe('arc device', function() {
         done();
       }
     };
-    device._oscIn([device._attributes.prefix + '/ring/range', 3, 80, 88, 1]);
+    device.oscIn([device._attributes.prefix + '/ring/range', 3, 80, 88, 1]);
   });
 
 

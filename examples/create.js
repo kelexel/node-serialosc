@@ -1,8 +1,6 @@
-var serialosc = require('./../lib/serialosc.js');
-
 // create a device
 // example is show with all options and their defaults
-var device = serialosc.createDevice({
+var device = new (require('./../lib/serialosc.js'))({
   type: 'grid',
   serialoscId: 'virtual',
   name: 'monome 64 (v0000001)',
