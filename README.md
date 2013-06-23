@@ -5,7 +5,7 @@ serialosc module for monome device emulation
 usage
 -----
     // create a virtual device
-    var device = serialosc.createDevice({
+    var device = new (require('serialosc'))({
       name: 'monome 64 (v0000001)',
       prefix: '/monome',
       sizeX: 8,
