@@ -13,6 +13,7 @@
     "mocha": "latest",
     "should": "latest",
     "underscore": "latest",
+    "prime": "*",
     "node-osc": "git://github.com/TheAlphaNerd/node-osc.git#master"
   },
   "keywords": [
