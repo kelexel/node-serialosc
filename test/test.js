@@ -3,7 +3,10 @@ var should = require('should');
 var _ = require('underscore');
 
 describe('default device', function() {
-  var device = createTestDevice();
+  var device = createTestDevice({
+    serialoscHost: '127.0.0.1',
+    listenHost: '127.0.0.1'
+  });
   it('has correct default properties', function() {
     device._attributes.should.have.property('id', 1);
     device._attributes.should.have.property('type', 'grid');
@@ -338,7 +341,9 @@ describe('256 device', function() {
     sizeX: 16,
     sizeY: 16,
     encoders: 0,
-    rotation: 0
+    rotation: 0,
+    serialoscHost: '127.0.0.1',
+    listenHost: '127.0.0.1'
   });
   it('has correct overridden properties', function() {
     device._attributes.should.have.property('id', 2);
@@ -1016,7 +1021,9 @@ describe('arc device', function() {
     prefix: '/testarc',
     sizeX: 0,
     sizeY: 0,
-    encoders: 4
+    encoders: 4,
+    serialoscHost: '127.0.0.1',
+    listenHost: '127.0.0.1'
   });
 
   it('has correct default properties', function() {
