@@ -1,6 +1,8 @@
+var serialosc = new (require(__dirname+'/../lib/serialosc.js'));
+
 // create a device
 // example is show with all options and their defaults
-var device = new (require('./../lib/serialosc.js'))({
+var device = {
   type: 'grid',
   serialoscId: 'virtual',
   name: 'monome 64 (v0000001)',
@@ -13,23 +15,26 @@ var device = new (require('./../lib/serialosc.js'))({
   listenPort: 1024 + Math.floor(Math.random() * 60000),
   serialoscHost: '127.0.0.1',
   serialoscPort: 1024 + Math.floor(Math.random() * 60000)
+};
+
+// begin listening on serialoscHost/serialoscPort
+// start bonjour advertisement
+var device = serialosc.createDevice(device, function() {
+  console.log("it's alive!")
 });
 
 // listen for led state change events
 // this will be called every time a led is turned on or off
-device.on('stateChange', function(data) {
-  console.log('stateChange: ' + data.x + ', ' + data.y + ', ' + data.s);
-});
+// device.on('stateChange', function(data) {
+//   console.log('stateChange: ' + data.x + ', ' + data.y + ', ' + data.s);
+// });
 
 // listen for led level change events
 // this will be called every time a led's level is changed
-device.on('levelChange', function(data) {
-  console.log('levelChange: ' + data.x + ', ' + data.y + ', ' + data.s);
-});
+// device.on('levelChange', function(data) {
+//   console.log('levelChange: ' + data.x + ', ' + data.y + ', ' + data.s);
+// });
 
-// begin listening on serialoscHost/serialoscPort
-// start bonjour advertisement
-device.start();
 
 // parse input looking for messages such as 0,0,1 or 2,3,0
 // send out a /grid/key message in response to emulate a press
