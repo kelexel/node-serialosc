@@ -4,6 +4,7 @@
 // var serialosc = new(require('../lib/serialosc'));
 
 
+<<<<<<< HEAD
 // describe('arc device', function() {
 //   serialosc.createDevice({
 //     type: 'arc',
@@ -18,6 +19,21 @@
 //   }, function(err, device) {
 //     if (err) throw Error(err);
 // console.log(device._attributes);
+=======
+describe('arc device', function() {
+  serialosc.createDevice({
+    type: 'arc',
+    serialoscId: 'testarc',
+    name: 'monome arc 4 (t0000003)',
+    prefix: '/testarc',
+    sizeX: 0,
+    sizeY: 0,
+    encoders: 4,
+    serialoscHost: '127.0.0.1',
+    listenHost: '127.0.0.1'
+  }, function(err, device) {
+    if (err) throw Error(err);
+>>>>>>> dinchak/master
 
 //     it('has correct default properties', function() {
 //       // device._attributes.should.have.property('id', 1);

@@ -18,6 +18,7 @@ describe('256 device', function() {
     rotation: 0,
     serialoscHost: '127.0.0.1',
     listenHost: '127.0.0.1'
+<<<<<<< HEAD
   }, function(err, obj) {
       if (err) throw Error(err);
       console.log('yep')
@@ -30,6 +31,11 @@ describe('256 device', function() {
     it('has correct overridden properties', function(done) {
       console.log('device is')
       console.log(device)
+=======
+  }, function(err, device) {
+    if (err) throw Error(err);
+    it('has correct overridden properties', function() {
+>>>>>>> dinchak/master
       // device._attributes.should.have.property('id', 1);
       device._attributes.should.have.property('type', 'grid');
       device._attributes.should.have.property('name', 'test monome 256 (t0000001)');
