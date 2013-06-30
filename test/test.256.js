@@ -18,7 +18,6 @@ describe('256 device', function() {
     listenHost: '127.0.0.1'
   }, function(err, device) {
     if (err) throw Error(err);
-console.log(device._attributes);
     it('has correct overridden properties', function() {
       // device._attributes.should.have.property('id', 1);
       device._attributes.should.have.property('type', 'grid');

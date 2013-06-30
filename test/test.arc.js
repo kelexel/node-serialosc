@@ -17,7 +17,6 @@ describe('arc device', function() {
     listenHost: '127.0.0.1'
   }, function(err, device) {
     if (err) throw Error(err);
-console.log(device._attributes);
 
     it('has correct default properties', function() {
       // device._attributes.should.have.property('id', 1);
