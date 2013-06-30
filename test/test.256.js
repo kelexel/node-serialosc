@@ -1,11 +1,13 @@
 var assert = require('assert');
 var should = require('should');
 // var _ = require('underscore');
-var serialosc = new(require('../lib/serialosc'));
 
 
 describe('256 device', function() {
-  serialosc.createDevice({
+  var device;
+  var serialosc = new(require('../lib/serialosc'));
+  before(function(done){
+    serialosc.createDevice({
     type: 'grid',
     serialoscId: 'test device',
     name: 'test monome 256 (t0000001)',
@@ -16,10 +18,18 @@ describe('256 device', function() {
     rotation: 0,
     serialoscHost: '127.0.0.1',
     listenHost: '127.0.0.1'
-  }, function(err, device) {
-    if (err) throw Error(err);
-console.log(device._attributes);
-    it('has correct overridden properties', function() {
+  }, function(err, obj) {
+      if (err) throw Error(err);
+      console.log('yep')
+      device = obj;
+      done();
+    });
+  }); 
+
+
+    it('has correct overridden properties', function(done) {
+      console.log('device is')
+      console.log(device)
       // device._attributes.should.have.property('id', 1);
       device._attributes.should.have.property('type', 'grid');
       device._attributes.should.have.property('name', 'test monome 256 (t0000001)');
@@ -28,8 +38,17 @@ console.log(device._attributes);
       device._attributes.should.have.property('sizeY', 16);
       device._attributes.should.have.property('encoders', 0);
       device._attributes.should.have.property('rotation', 0);
+      done();
     });
-  
+after(function(done) {
+      var id = device._attributes.id;
+      serialosc.killDevice(id);
+      // serialosc.getDevice(id).should.eql(false);
+    console.log('end');
+      done();
+
+})    
+  return;
     it('responds to /sys/port', function(done) {
       device.oscOut = function(msg, port) {
         msg.should.equal('/sys/port');
@@ -704,12 +723,19 @@ console.log(device._attributes);
       device.oscIn([device._attributes.prefix + '/grid/led/level/all', 15]);
       device._emitter.removeAllListeners('ledLevelChange');
    });
-    it('should be dead', function(done) {
+after(function(done) {
       var id = device._attributes.id;
       serialosc.killDevice(id);
-      serialosc.getDevice(id).should.eql(false);
+      // serialosc.getDevice(id).should.eql(false);
       done();
-    });
 
-  });
+})
+    // it('should be dead', function(done) {
+    //   var id = device._attributes.id;
+    //   serialosc.killDevice(id);
+    //   serialosc.getDevice(id).should.eql(false);
+    //   done();
+    // });
+
+  // });
 });
