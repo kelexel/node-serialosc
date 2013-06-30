@@ -9,12 +9,12 @@
   },
   "scripts": {"test": "./node_modules/mocha/bin/mocha"},
   "dependencies": {
-    "mdns": "latest",
-    "mocha": "latest",
-    "should": "latest",
-    "underscore": "latest",
-    "prime": "*",
-    "async": "*",
+    "mdns": ">=1.1.0",
+    "mocha": ">=1.11.0",
+    "should": ">=1.2.2",
+    "prime": ">=0.1.0",
+    "prime-util": ">=0.2.0",
+    "async": ">=0.2.9",
     "node-osc": "git://github.com/TheAlphaNerd/node-osc.git#master"
   },
   "keywords": [
